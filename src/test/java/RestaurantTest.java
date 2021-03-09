@@ -62,5 +62,32 @@ class RestaurantTest {
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+    //<<<<<<<<<<<<<<<<<<<<<<<TOTAL ORDER BILL>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    //When itemName is passed, it should return corresponding price for that item
+    //It should fail when price of other itemName is returned
+    //The sum of no.of item prices should be correct
+    //It should fail if sum of no.of items is incorrect
+
+    @Test
+    public void getOrderTotal_should_return_order_value_when_name_of_the_item_is_given_in_string_format(){
+        setMenuItems();
+
+        List<String> selectedItemName=new ArrayList<String>();
+        selectedItemName.add("Sweet corn soup");
+        selectedItemName.add("Vegetable lasagne");
+
+        Double expectedRes=0.0;
+
+        for(int i=0;i<restaurant.getMenu().size();i++){
+            Item item=(Item) restaurant.getMenu().get(i);
+            if(item.getName().equals(selectedItemName.get(i))){
+                expectedRes = expectedRes+item.getPrice();
+            }
+        }
+        Double actualRes=restaurant.getOrderTotal(selectedItemName);
+
+        assertEquals(expectedRes,actualRes);
+    }
+    //<<<<<<<<<<<<<<<<<<<<<<<TOTAL ORDER BILL>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 }
