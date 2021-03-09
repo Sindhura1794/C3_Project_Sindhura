@@ -75,6 +75,16 @@ public class Restaurant {
     public int getPrice() {
         return price;
     }
+    public Double getOrderTotal(List<String> name){
+        Double total=0.0;
 
+        for(Item item:menu){
+            for(int i=0; i<name.size();i++) {
+                if (item.getName().equals(name.get(i)))
+                    total = total + item.getPrice();
+            }
+        }
+        return total;
+    }
 
 }
